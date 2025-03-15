@@ -18,7 +18,7 @@ int s_width = 600;
 int s_height = 700;
 
 
-Rectangle s = {200,s_height / 2 - 20 ,20,20};
+Rectangle s = { 200,s_height / 2 - 20 ,20,20 };
 float velocity = 0;
 float rotation = 0;  // Rotation angle
 
@@ -38,9 +38,9 @@ bool gameover = false;
 
 
 Rectangle pipes[4] = {
-	{s_width, 0, 60, 250},               
+	{s_width, 0, 60, 250},
 	{s_width, 250 + pipeGap, 60, s_height - 250 + pipeGap},
-	{s_width + (s_width / 2), 0, 60, 150},   
+	{s_width + (s_width / 2), 0, 60, 150},
 	{s_width + (s_width / 2), 150 + pipeGap, 60, s_height - 150 + pipeGap}
 };
 
@@ -48,10 +48,6 @@ Rectangle pipes[4] = {
 Color grey = { 130, 130, 130, 255 };
 Color lightGrey = { 200, 200, 200, 255 };
 Color darkGrey = { 80, 80, 80, 255 };
-
-
-int borderThickness = 10; // Thickness of the border
-Rectangle gameArea = { borderThickness, borderThickness + 50, s_width - 2 * borderThickness, s_height - 2 * borderThickness - 50 };
 
 
 int main() {
@@ -65,13 +61,13 @@ int main() {
 	while (WindowShouldClose() == false) {
 
 		BeginDrawing();
-		
-		
+
+
 		//clearing
 		ClearBackground(lightGrey);
-		
+
 		if (!gameover) {
-		
+
 			s_Update();
 			p_Update();
 
@@ -86,7 +82,7 @@ int main() {
 			ResetPage();
 		}
 
-		
+
 		EndDrawing();
 
 	}
@@ -103,10 +99,7 @@ void s_Draw() {
 
 	DrawRectanglePro(s, pivot, rotation, darkGrey);
 
-	int scoreX = s_width / 2 - MeasureText(TextFormat("Score: %d", score), 20) / 2;
-	int scoreY = 10;  // Above the game area
-
-	DrawText(TextFormat("Score: %d", score), scoreX, scoreY, 20, YELLOW);
+	DrawText(TextFormat("Score: %d", score), 10, 10, 20, YELLOW);
 }
 
 
@@ -151,8 +144,6 @@ void s_Update() {
 
 void p_Draw() {
 
-
-	DrawRectangleLinesEx(gameArea, borderThickness, darkGrey);
 
 	for (int i = 0; i < 4; i++) {
 		DrawRectangle(pipes[i].x, pipes[i].y, pipes[i].width, pipes[i].height, grey);
